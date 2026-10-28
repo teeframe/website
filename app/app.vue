@@ -22,7 +22,6 @@ const links = {
   framework: 'https://github.com/teeframe/framework',
   protocol: 'https://protocol-docs.teeframe.com/',
   maps: 'https://map-docs.teeframe.com/',
-  setup: 'https://github.com/teeframe/teeframe#install-system-dependencies-ubuntu-2604',
 }
 
 const steps = [
@@ -70,49 +69,49 @@ onUnmounted(() => clearTimeout(feedbackTimer))
 
 <template>
   <UApp :toaster="{ position: 'bottom-right', duration: 3500 }">
-  <div class="site-shell min-h-screen bg-canvas text-foreground">
-    <ULink raw to="#main" external class="skip-link">Skip to content</ULink>
+  <div class="relative min-h-screen bg-canvas text-foreground">
+    <ULink raw to="#main" external class="fixed top-3 left-3 z-50 -translate-y-24 rounded bg-accent px-3 py-2 text-sm text-white focus:translate-y-0">Skip to content</ULink>
     <div class="page-lines" aria-hidden="true"><span class="rail rail-left" /><span class="rail rail-right" /></div>
 
     <header class="site-header sticky top-0 z-40" @keydown.esc="menuOpen = false">
-      <div class="frame flex h-16 items-center justify-between gap-5">
+      <div class="frame relative mx-auto px-4 sm:px-7 flex h-16 items-center justify-between gap-5">
         <ULink raw to="#" external class="flex items-center gap-2" aria-label="TeeFrame home" @click="menuOpen = false">
           <TeeMark class="h-8 w-8 text-accent" />
           <span class="text-lg font-semibold tracking-[-0.045em]">TeeFrame</span>
         </ULink>
         <nav aria-label="Main navigation" class="hidden items-center gap-4 text-[13px] md:flex">
-          <ULink raw to="#documentation" external class="nav-link text-accent">Documentation</ULink>
-          <ULink raw to="#framework" external class="nav-link">Framework</ULink>
-          <ULink raw to="#features" external class="nav-link">Features</ULink>
+          <ULink raw to="#documentation" external class="transition-colors hover:text-accent text-accent">Documentation</ULink>
+          <ULink raw to="#framework" external class="transition-colors hover:text-accent">Framework</ULink>
+          <ULink raw to="#features" external class="transition-colors hover:text-accent">Features</ULink>
         </nav>
         <div class="flex items-center gap-3">
-            <GithubLink :to="links.github" :stars="githubStars" class="nav-link" />
+            <GithubLink :to="links.github" :stars="githubStars" class="transition-colors hover:text-accent" />
 
           <UButton to="#start" external label="Get started" trailing-icon="i-lucide-arrow-right" class="hidden sm:inline-flex" />
           <UButton color="neutral" variant="outline" square class="size-9 p-0 text-muted md:hidden" :icon="menuOpen ? 'i-lucide-x' : 'i-lucide-menu'" :aria-expanded="menuOpen" aria-controls="mobile-nav" :aria-label="menuOpen ? 'Close navigation' : 'Open navigation'" @click="menuOpen = !menuOpen" />
         </div>
       </div>
       <nav v-show="menuOpen" id="mobile-nav" aria-label="Mobile navigation" class="border-t border-line md:hidden">
-        <div class="frame flex flex-col gap-4 py-5 text-[13px]">
+        <div class="frame relative mx-auto px-4 sm:px-7 flex flex-col gap-4 py-5 text-[13px]">
           <ULink raw to="#documentation" external class="text-accent" @click="menuOpen = false">Documentation</ULink>
-          <ULink raw to="#framework" external class="nav-link" @click="menuOpen = false">Framework</ULink>
-          <ULink raw to="#features" external class="nav-link" @click="menuOpen = false">Features</ULink>
-          <ULink raw to="#start" external class="nav-link" @click="menuOpen = false">Get started</ULink>
-          <GithubLink :to="links.github" :stars="githubStars" class="nav-link" @click="menuOpen = false" />
+          <ULink raw to="#framework" external class="transition-colors hover:text-accent" @click="menuOpen = false">Framework</ULink>
+          <ULink raw to="#features" external class="transition-colors hover:text-accent" @click="menuOpen = false">Features</ULink>
+          <ULink raw to="#start" external class="transition-colors hover:text-accent" @click="menuOpen = false">Get started</ULink>
+          <GithubLink :to="links.github" :stars="githubStars" class="transition-colors hover:text-accent" @click="menuOpen = false" />
         </div>
       </nav>
     </header>
 
     <main id="main">
-      <section class="band hero-band" aria-labelledby="hero-title">
+      <section class="band" aria-labelledby="hero-title">
         <div class="hero-grid" aria-hidden="true" />
-        <div class="frame grid grid-cols-1 items-center gap-8 py-12 md:grid-cols-[1.2fr_0.8fr] md:gap-10">
+        <div class="frame relative mx-auto px-4 sm:px-7 grid grid-cols-1 items-center gap-8 py-12 md:grid-cols-[1.2fr_0.8fr] md:gap-10">
           <div>
-            <p class="eyebrow mb-5">PHP FRAMEWORK / TEEWORLDS 0.6</p>
+            <p class="font-mono text-[10px] tracking-[0.08em] text-muted mb-5">PHP FRAMEWORK / TEEWORLDS 0.6</p>
             <h1 id="hero-title" class="text-[clamp(2.125rem,4.5vw,3.25rem)] leading-[1.1] font-medium tracking-[-0.05em]">Stop rebasing.<br /><span class="text-accent">Build your mod.</span></h1>
             <p class="mt-5 max-w-[410px] text-sm leading-7 text-muted">Keep your game logic in your own project. TeeFrame is a Composer dependency, not a repository fork you have to keep rebasing over and over again.</p>
             <div class="mt-6 flex flex-wrap gap-2.5">
-              <UButton to="#documentation" external label="Read the documentation" icon="i-lucide-book-open" class="hero-docs-button" />
+              <UButton to="#documentation" external label="Read the documentation" icon="i-lucide-book-open" />
               <UButton to="#start" external label="Get started" color="neutral" variant="outline" trailing-icon="i-lucide-arrow-right" />
             </div>
           </div>
@@ -121,18 +120,18 @@ onUnmounted(() => clearTimeout(feedbackTimer))
       </section>
 
       <section id="documentation" class="band" aria-labelledby="docs-title">
-        <div class="frame py-10 sm:py-12">
+        <div class="frame relative mx-auto px-4 sm:px-7 py-10 sm:py-12">
           <div class="mb-6 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
             <div>
-              <p class="eyebrow mb-3">01 / DOCUMENTATION</p>
-              <h2 id="docs-title" class="section-heading">Protocol and map references.</h2>
+              <p class="font-mono text-[10px] tracking-[0.08em] text-muted mb-3">01 / DOCUMENTATION</p>
+              <h2 id="docs-title" class="text-[clamp(1.375rem,2.5vw,1.625rem)] leading-[1.25] font-medium tracking-[-0.035em]">Protocol and map references.</h2>
             </div>
           </div>
           <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <ULink raw v-for="doc in docs" :key="doc.href" :to="doc.href" class="doc-card group relative block rounded-md">
               <UCard class="doc-card-panel h-full">
               <div class="mb-4 flex items-center justify-between">
-                <span class="flex items-center gap-2.5"><UIcon :name="doc.icon" class="h-4 w-4 text-accent" /><span class="eyebrow text-[9px]">{{ doc.label }}</span></span>
+                <span class="flex items-center gap-2.5"><UIcon :name="doc.icon" class="h-4 w-4 text-accent" /><span class="font-mono text-[9px] tracking-[0.08em] text-muted">{{ doc.label }}</span></span>
                 <UIcon name="i-lucide-arrow-up-right" class="h-4 w-4 text-accent transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
               <h3 class="text-base font-medium tracking-[-0.025em]">{{ doc.title }}</h3>
@@ -148,17 +147,17 @@ onUnmounted(() => clearTimeout(feedbackTimer))
       </section>
 
       <section id="framework" class="band" aria-labelledby="framework-title">
-        <div class="frame grid grid-cols-1 gap-7 py-10 sm:py-12 md:grid-cols-2 md:items-center md:gap-12">
+        <div class="frame relative mx-auto px-4 sm:px-7 grid grid-cols-1 gap-7 py-10 sm:py-12 md:grid-cols-2 md:items-center md:gap-12">
           <div>
-            <p class="eyebrow mb-3">02 / FRAMEWORK</p>
-            <h2 id="framework-title" class="section-heading">Your mod isn't an engine fork.</h2>
-            <p class="mt-4 text-sm leading-7 text-muted">Write your controllers, entities, and commands in the skeleton. The engine stays in <code class="inline-code">vendor/</code>, managed by Composer.</p>
+            <p class="font-mono text-[10px] tracking-[0.08em] text-muted mb-3">02 / FRAMEWORK</p>
+            <h2 id="framework-title" class="text-[clamp(1.375rem,2.5vw,1.625rem)] leading-[1.25] font-medium tracking-[-0.035em]">Your mod isn't an engine fork.</h2>
+            <p class="mt-4 text-sm leading-7 text-muted">Write your controllers, entities, and commands in the skeleton. The engine stays in <code class="rounded-sm bg-surface px-1 font-mono text-[11px] text-accent">vendor/</code>, managed by Composer.</p>
             <p class="mt-3 text-[13px] leading-6 text-muted">Update the framework without merging engine commits into your game code.</p>
             <ULink raw :to="links.framework" class="mt-5 inline-flex items-center gap-2 text-[13px] font-medium text-accent" target="_blank" rel="noopener noreferrer">Browse the framework <UIcon name="i-lucide-arrow-up-right" class="h-3.5 w-3.5" /></ULink>
           </div>
           <UCard class="project-diagram min-w-0" :ui="{ body: 'p-0 sm:p-0' }">
             <template #header>
-              <div class="flex items-center justify-between"><span class="font-mono text-[11px] text-muted">teeframe/</span><span class="eyebrow text-[9px]">PROJECT STRUCTURE</span></div>
+              <div class="flex items-center justify-between"><span class="font-mono text-[11px] text-muted">teeframe/</span><span class="font-mono text-[9px] tracking-[0.08em] text-muted">PROJECT STRUCTURE</span></div>
             </template>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
               <div class="p-4 sm:border-r sm:border-line md:border-r-0 lg:border-r">
@@ -178,35 +177,35 @@ onUnmounted(() => clearTimeout(feedbackTimer))
       </section>
 
       <section id="features" class="band" aria-labelledby="features-title">
-        <div class="frame py-10 sm:py-12">
+        <div class="frame relative mx-auto px-4 sm:px-7 py-10 sm:py-12">
           <div class="mb-6">
-            <p class="eyebrow mb-3">03 / FEATURES</p>
-            <h2 id="features-title" class="section-heading">What's in the engine.</h2>
+            <p class="font-mono text-[10px] tracking-[0.08em] text-muted mb-3">03 / FEATURES</p>
+            <h2 id="features-title" class="text-[clamp(1.375rem,2.5vw,1.625rem)] leading-[1.25] font-medium tracking-[-0.035em]">What's in the engine.</h2>
           </div>
           <FeaturesGrid />
         </div>
       </section>
 
       <section id="start" class="band" aria-labelledby="start-title">
-        <div class="frame grid grid-cols-1 gap-7 py-10 sm:py-12 md:grid-cols-[0.85fr_1.15fr] md:gap-12">
+        <div class="frame relative mx-auto px-4 sm:px-7 grid grid-cols-1 gap-7 py-10 sm:py-12 md:grid-cols-[0.85fr_1.15fr] md:gap-12">
           <div>
-            <p class="eyebrow mb-3">04 / GET STARTED</p>
-            <h2 id="start-title" class="section-heading">Run your first server.</h2>
-            <p class="mt-4 max-w-[325px] text-[13px] leading-6 text-muted">The skeleton includes a deathmatch world. Start it locally, then change the game logic in <code class="inline-code">app/</code>.</p>
-            <ULink raw :to="links.setup" class="mt-3 inline-flex items-center gap-2 text-[13px] text-accent" target="_blank" rel="noopener noreferrer">Browse the skeleton <UIcon name="i-lucide-arrow-up-right" class="h-3 w-3" /></ULink>
+            <p class="font-mono text-[10px] tracking-[0.08em] text-muted mb-3">04 / GET STARTED</p>
+            <h2 id="start-title" class="text-[clamp(1.375rem,2.5vw,1.625rem)] leading-[1.25] font-medium tracking-[-0.035em]">Run your first server.</h2>
+            <p class="mt-4 max-w-[325px] text-[13px] leading-6 text-muted">The skeleton includes a deathmatch world. Start it locally, then change the game logic in <code class="rounded-sm bg-surface px-1 font-mono text-[11px] text-accent">app/</code>.</p>
+            <ULink raw :to="links.github" class="mt-3 inline-flex items-center gap-2 text-[13px] text-accent" target="_blank" rel="noopener noreferrer">Browse the skeleton <UIcon name="i-lucide-arrow-up-right" class="h-3 w-3" /></ULink>
           </div>
           <div class="min-w-0 space-y-4">
             <div>
-              <h3 class="mb-2 flex items-center gap-2.5 text-xs font-medium"><span class="setup-step-number font-mono text-[10px] font-normal text-accent">01</span>Install system dependencies</h3>
+              <h3 class="mb-2 flex items-center gap-2.5 text-xs font-medium"><span class="font-mono text-[10px] font-normal text-accent">01</span>Install system dependencies</h3>
               <div class="flex flex-wrap gap-2" role="group" aria-label="Requirements">
                 <UBadge v-for="requirement in ['PHP 8.5', 'Composer', 'Swoole Extension']" :key="requirement" :label="requirement" color="primary" variant="subtle" />
               </div>
             </div>
             <div v-for="step in steps" :key="step.id">
-              <h3 class="mb-2 flex items-center gap-2.5 text-xs font-medium"><span class="setup-step-number font-mono text-[10px] font-normal text-accent">{{ step.number }}</span>{{ step.title }}</h3>
-              <div class="command-window relative rounded border border-line bg-white">
+              <h3 class="mb-2 flex items-center gap-2.5 text-xs font-medium"><span class="font-mono text-[10px] font-normal text-accent">{{ step.number }}</span>{{ step.title }}</h3>
+              <div class="relative rounded border border-line bg-white">
                 <pre class="overflow-x-auto px-3 py-2.5 pr-12 font-mono text-[11px] leading-6" tabindex="0" :aria-label="step.title + ' commands'"><code><span v-for="command in step.commands" :key="command" class="block"><span class="mr-2 select-none text-accent/60" aria-hidden="true">$</span>{{ command }}</span></code></pre>
-                <UButton color="neutral" variant="ghost" size="xs" square class="copy-button absolute top-1.5 right-1.5 size-8 p-0" :icon="copiedStep === step.id ? 'i-lucide-check' : 'i-lucide-copy'" :aria-label="copiedStep === step.id ? 'Commands copied' : 'Copy ' + step.title.toLowerCase() + ' commands'" @click="copyCommands(step)" />
+                <UButton color="neutral" variant="ghost" size="xs" square class="absolute top-1.5 right-1.5 size-8 p-0" :icon="copiedStep === step.id ? 'i-lucide-check' : 'i-lucide-copy'" :aria-label="copiedStep === step.id ? 'Commands copied' : 'Copy ' + step.title.toLowerCase() + ' commands'" @click="copyCommands(step)" />
               </div>
             </div>
           </div>
@@ -215,7 +214,7 @@ onUnmounted(() => clearTimeout(feedbackTimer))
     </main>
 
     <footer class="band">
-      <div class="frame flex flex-col justify-between gap-4 py-6 sm:flex-row sm:items-center">
+      <div class="frame relative mx-auto px-4 sm:px-7 flex flex-col justify-between gap-4 py-6 sm:flex-row sm:items-center">
         <div class="space-y-2">
           <div class="flex items-center gap-3"><span class="text-[13px] font-medium tracking-[-0.025em]">TeeFrame</span><span class="text-[11px] text-muted">© {{ new Date().getFullYear() }} · MIT</span></div>
           <p class="flex items-center gap-1 text-xs text-muted"><span>Created with</span><UIcon name="i-lucide-heart" class="h-3.5 w-3.5 text-rose-500 [&_path]:fill-current" /><span class="sr-only">love</span><span>by</span><ULink raw to="https://github.com/miguilimzero" target="_blank" rel="noopener noreferrer" class="hover:text-accent">Miguilim</ULink></p>

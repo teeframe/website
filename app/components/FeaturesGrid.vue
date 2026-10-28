@@ -8,16 +8,16 @@ const selectedWorld = ref<typeof worlds[number]>(worlds[0])
 </script>
 
 <template>
-  <div class="features-grid grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-6">
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-6">
     <UCard class="feature-card sm:col-span-2 lg:col-span-4 lg:row-span-2" :ui="{ body: 'flex h-full flex-col' }">
-      <div class="mb-4 flex items-center justify-between"><UIcon name="i-lucide-layers" class="size-5 text-accent" /><span class="eyebrow text-[9px]">MULTI-WORLD</span></div>
+      <div class="mb-4 flex items-center justify-between"><UIcon name="i-lucide-layers" class="size-5 text-accent" /><span class="font-mono text-[9px] tracking-[0.08em] text-muted">MULTI-WORLD</span></div>
       <h3 class="text-base font-medium tracking-[-0.025em]">Multiple worlds. One server.</h3>
       <p class="mt-2 max-w-[420px] text-[13px] leading-6 text-muted">Run different maps and game modes together. Each world has its own controller, entities, and players.</p>
-      <div class="world-schematic mt-auto pt-6">
+      <div class="mt-auto pt-6">
         <div class="mx-auto flex w-fit items-center gap-2 rounded border border-accent/25 bg-surface px-4 py-2 font-mono text-[10px] text-accent"><UIcon name="i-lucide-box" class="size-3.5" /> TEEFRAME SERVER</div>
         <div class="world-connectors mx-auto h-8 w-[68%]" aria-hidden="true" />
         <div class="grid grid-cols-3 gap-2 sm:gap-3" role="group" aria-label="Example worlds">
-          <UButton v-for="world in worlds" :key="world.id" color="neutral" variant="outline" :aria-pressed="selectedWorld.id === world.id" :aria-label="`Show ${world.title} world`" :class="selectedWorld.id === world.id ? 'border-accent/50 bg-surface' : 'bg-white'" :ui="{ base: 'world-button flex min-w-0 flex-col items-stretch justify-start gap-0 p-2 text-left sm:p-3' }" @click="selectedWorld = world">
+          <UButton v-for="world in worlds" :key="world.id" color="neutral" variant="outline" :aria-pressed="selectedWorld.id === world.id" :aria-label="`Show ${world.title} world`" :class="selectedWorld.id === world.id ? 'border-accent/50 bg-surface' : 'bg-white'" :ui="{ base: 'flex min-w-0 flex-col items-stretch justify-start gap-0 p-2 text-left sm:p-3' }" @click="selectedWorld = world">
             <span class="mb-2 font-mono text-[8px] font-normal tracking-wide text-muted">WORLD {{ world.number }}</span>
             <svg viewBox="0 0 140 65" fill="none" class="w-full text-accent/65" aria-hidden="true">
               <g stroke="currentColor" stroke-width="1.2" stroke-linejoin="round">
@@ -30,7 +30,7 @@ const selectedWorld = ref<typeof worlds[number]>(worlds[0])
             <span class="mt-2 truncate text-[11px] font-medium">{{ world.label }}</span>
           </UButton>
         </div>
-        <p class="world-caption mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[10px] text-muted" aria-live="polite"><span class="text-accent">{{ selectedWorld.map }}</span><span aria-hidden="true">/</span>{{ selectedWorld.title }}</p>
+        <p class="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[10px] text-muted" aria-live="polite"><span class="text-accent">{{ selectedWorld.map }}</span><span aria-hidden="true">/</span>{{ selectedWorld.title }}</p>
       </div>
     </UCard>
 
