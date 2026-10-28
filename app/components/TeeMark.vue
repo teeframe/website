@@ -1,0 +1,16 @@
+<template>
+  <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="m139 126 32 27c2 2 2 4 0 6l-9 10c-2 2-4 2-6 0l-28-24" />
+    <path d="m54 70-14-12c-5-5-2-14 6-23 7-8 14-13 18-9l15 13M42 58l18-20 11 10M52 64l20-23c5-6 13-6 19-1l18 16M64 74l20-24M72 81l24-25" />
+    <path d="M54 159c-6 4-8 11-8 19h95c3-13-3-19-13-22" />
+    <path d="M84 174v-9c0-7 12-11 26-11s27 4 28 11" />
+    <path d="M109 73c-27-1-48 11-64 40-11 23-5 47 20 57 8 3 15 4 22 4M128 82c10 17 15 41 9 60-3 8-7 14-10 18" />
+    <path d="M88 71c3-12 18-25 33-21 13 3 24 18 23 34l-4 9-18-7-28-7-6-8Z" />
+    <path d="m110 51-12 26m26-26-15 30m23-20-12 24m-27-7c16 5 33 8 50 8" />
+    <ellipse cx="91" cy="105" rx="8" ry="15" />
+    <ellipse cx="111" cy="106" rx="8" ry="15" />
+    <path d="M41 126c22 13 63 27 97 7M43 135c25 14 62 25 92 9" />
+    <path d="M55 129h17v22H55zM55 136h17" />
+    <path d="M63 141h1" stroke-width="3.5" />
+  </svg>
+</template>
