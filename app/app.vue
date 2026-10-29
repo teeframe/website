@@ -161,7 +161,7 @@ onUnmounted(() => clearTimeout(feedbackTimer))
             <h2 id="about-title" class="text-[clamp(1.375rem,2.5vw,1.625rem)] leading-[1.25] font-medium tracking-[-0.035em]">The reason behind TeeFrame.</h2>
           </div>
           <div class="space-y-3 text-sm leading-7 text-muted">
-            <p>TeeFrame is a PHP framework for building Teeworlds 0.6 game servers. It provides the networking, physics, snapshots, and map handling, so you can focus on building your mod instead of maintaining an fork.</p>
+            <p>TeeFrame is a PHP framework for building Teeworlds 0.6 game servers. It provides the networking, physics, snapshots, and map handling, so you can focus on building your mod instead of maintaining a fork.</p>
             <p>When your mod lives inside a fork, keeping it up to date means merging upstream commits, resolving conflicts, and checking how the changes affect your own code. Maintaining the fork becomes part of maintaining the game.</p>
             <p>TeeFrame exists to separate those responsibilities. Your mod lives in its own project, while the engine is installed through Composer. Update the framework as a dependency instead of repeatedly rebasing for every new change upstream.</p>
           </div>
