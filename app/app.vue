@@ -212,8 +212,11 @@ onUnmounted(() => clearTimeout(feedbackTimer))
           <div class="min-w-0 space-y-4">
             <div>
               <h3 class="mb-2 flex items-center gap-2.5 text-xs font-medium"><span class="font-mono text-[10px] font-normal text-accent">01</span>Install system dependencies</h3>
-              <div class="flex flex-wrap gap-2" role="group" aria-label="Requirements">
-                <UBadge v-for="requirement in ['PHP 8.5', 'Composer', 'Swoole Extension']" :key="requirement" :label="requirement" color="primary" variant="subtle" />
+              <div class="flex flex-wrap items-start justify-between gap-3">
+                <div class="flex min-w-min flex-1 flex-wrap gap-2" role="group" aria-label="Requirements">
+                  <UBadge v-for="requirement in ['PHP 8.5', 'Composer', 'Swoole Extension']" :key="requirement" :label="requirement" color="primary" variant="subtle" />
+                </div>
+                <InstallationGuide />
               </div>
             </div>
             <div v-for="step in steps" :key="step.id">
