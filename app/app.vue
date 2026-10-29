@@ -165,7 +165,7 @@ onUnmounted(() => clearTimeout(feedbackTimer))
         <div class="frame relative mx-auto px-4 sm:px-7 grid grid-cols-1 gap-7 py-10 sm:py-12 md:grid-cols-2 md:items-center md:gap-12">
           <div>
             <p class="font-mono text-[10px] tracking-[0.08em] text-muted mb-3">03 / FRAMEWORK</p>
-            <h2 id="framework-title" class="text-[clamp(1.375rem,2.5vw,1.625rem)] leading-[1.25] font-medium tracking-[-0.035em]">Your mod isn't an full-game fork.</h2>
+            <h2 id="framework-title" class="text-[clamp(1.375rem,2.5vw,1.625rem)] leading-[1.25] font-medium tracking-[-0.035em]">Your mod isn't a full-game fork.</h2>
             <p class="mt-4 text-sm leading-7 text-muted">Write your controllers, entities, and commands in the skeleton. The engine stays in <code class="rounded-sm bg-surface px-1 font-mono text-[11px] text-accent">vendor/</code>, managed by Composer.</p>
             <p class="mt-3 text-[13px] leading-6 text-muted">Update the framework without merging engine commits into your game code.</p>
             <ULink raw :to="links.framework" class="mt-5 inline-flex items-center gap-2 text-[13px] font-medium text-accent" target="_blank" rel="noopener noreferrer">Browse the framework <UIcon name="i-lucide-arrow-up-right" class="h-3.5 w-3.5" /></ULink>
