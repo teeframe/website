@@ -1,13 +1,33 @@
 
 import { env } from 'node:process'
+import { siteDescription as description } from './shared/site'
 
 const siteUrl = (env.NUXT_PUBLIC_SITE_URL || 'https://teeframe.com').replace(/\/+$/, '')
-const description = 'A PHP framework for Teeworlds 0.6. Keep your mod separate from the engine and update through Composer instead of rebasing a server fork.'
+
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: false },
-  modules: ['@nuxt/fonts', '@nuxt/ui'],
+  modules: ['@nuxt/fonts', '@nuxt/ui', 'nuxt-og-image'],
+  site: {
+    url: siteUrl,
+    name: 'TeeFrame',
+    description,
+  },
+  ogImage: {
+    zeroRuntime: true,
+    defaults: {
+      width: 1200,
+      height: 630,
+      extension: 'png',
+      emojis: false,
+    },
+  },
+  nitro: {
+    prerender: {
+      routes: ['/'],
+    },
+  },
   ui: {
     fonts: false,
     colorMode: false,
@@ -37,8 +57,8 @@ export default defineNuxtConfig({
       subsets: ['latin'],
     },
     families: [
-      { name: 'Geist' },
-      { name: 'Geist Mono' },
+      { name: 'Geist', global: true },
+      { name: 'Geist Mono', global: true },
     ],
   },
 
@@ -53,14 +73,12 @@ export default defineNuxtConfig({
         { property: 'og:description', content: description },
         { property: 'og:type', content: 'website' },
         { property: 'og:url', content: `${siteUrl}/` },
-        { property: 'og:image', content: `${siteUrl}/og-image.png` },
-        { property: 'og:image:width', content: '1200' },
-        { property: 'og:image:height', content: '630' },
-        { property: 'og:image:alt', content: 'TeeFrame. Build your mod. Skip the rebasing.' },
+        { name: 'twitter:description', content: description },
         { name: 'twitter:card', content: 'summary_large_image' },
       ],
       link: [
-        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'icon', type: 'image/png', sizes: '512x512', href: '/favicon.png' },
         { rel: 'canonical', href: `${siteUrl}/` },
       ],
     },

@@ -1,4 +1,11 @@
 <script setup lang="ts">
+import { defineOgImage } from '#og-image/app'
+import { siteDescription } from '#shared/site'
+
+defineOgImage('TeeFrame.takumi', { description: siteDescription }, {
+  alt: 'TeeFrame. Stop rebasing. Build your mod. The tee wearing a hard hat and carrying a hammer on a light blueprint grid.',
+})
+
 const menuOpen = ref(false)
 const copiedStep = ref<string | null>(null)
 const toast = useToast()
@@ -110,7 +117,7 @@ onUnmounted(() => clearTimeout(feedbackTimer))
           <div>
             <p class="font-mono text-[10px] tracking-[0.08em] text-muted mb-5">PHP FRAMEWORK / TEEWORLDS 0.6</p>
             <h1 id="hero-title" class="text-[clamp(2.125rem,4.5vw,3.25rem)] leading-[1.1] font-medium tracking-[-0.05em]">Stop rebasing.<br /><span class="text-accent">Build your mod.</span></h1>
-            <p class="mt-5 max-w-[410px] text-sm leading-7 text-muted">Keep your game logic in your own project. TeeFrame is a package dependency, not a repository fork you have to keep rebasing over and over again.</p>
+            <p class="mt-5 max-w-[410px] text-sm leading-7 text-muted">{{ siteDescription }}</p>
             <div class="mt-6 flex flex-wrap gap-2.5">
               <UButton to="#documentation" external label="Read the documentation" icon="i-lucide-book-open" />
               <UButton to="#start" external label="Get started" color="neutral" variant="outline" trailing-icon="i-lucide-arrow-right" />
