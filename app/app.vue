@@ -151,7 +151,7 @@ onUnmounted(() => clearTimeout(feedbackTimer))
         <div class="frame relative mx-auto px-4 sm:px-7 grid grid-cols-1 gap-7 py-10 sm:py-12 md:grid-cols-[0.85fr_1.15fr] md:gap-12">
           <div>
             <p class="font-mono text-[10px] tracking-[0.08em] text-muted mb-3">02 / THE PURPOSE</p>
-            <h2 id="about-title" class="text-[clamp(1.375rem,2.5vw,1.625rem)] leading-[1.25] font-medium tracking-[-0.035em]">The purpose behind TeeFrame.</h2>
+            <h2 id="about-title" class="text-[clamp(1.375rem,2.5vw,1.625rem)] leading-[1.25] font-medium tracking-[-0.035em]">The reason behind TeeFrame.</h2>
           </div>
           <div class="space-y-3 text-sm leading-7 text-muted">
             <p>TeeFrame is a PHP framework for building Teeworlds 0.6 game servers. It provides the networking, physics, snapshots, and map handling, so you can focus on building your mod instead of maintaining an fork.</p>
