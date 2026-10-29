@@ -5,14 +5,14 @@ const props = defineProps<{
 }>()
 
 const formattedStars = computed(() => props.stars === null
-  ? ''
+  ? '?'
   : new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(props.stars))
 </script>
 
 <template>
   <ULink raw :to="to" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5" :aria-label="stars === null ? 'TeeFrame on GitHub' : `TeeFrame on GitHub, ${stars} stars`">
     <UIcon name="i-simple-icons-github" class="size-3.5" />
-    <span v-if="stars !== null" class="inline-flex items-center font-mono text-[13px] tabular-nums" :title="`${stars} GitHub stars`">
+    <span class="inline-flex items-center font-mono text-[13px] tabular-nums" :title="`${stars} GitHub stars`">
       {{ formattedStars }}
     </span>
   </ULink>

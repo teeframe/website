@@ -81,6 +81,7 @@ onUnmounted(() => clearTimeout(feedbackTimer))
         </ULink>
         <nav aria-label="Main navigation" class="hidden items-center gap-4 text-[13px] md:flex">
           <ULink raw to="#documentation" external class="transition-colors hover:text-accent text-accent">Documentation</ULink>
+          <ULink raw to="#about" external class="transition-colors hover:text-accent">The purpose</ULink>
           <ULink raw to="#framework" external class="transition-colors hover:text-accent">Framework</ULink>
           <ULink raw to="#features" external class="transition-colors hover:text-accent">Features</ULink>
         </nav>
@@ -94,10 +95,10 @@ onUnmounted(() => clearTimeout(feedbackTimer))
       <nav v-show="menuOpen" id="mobile-nav" aria-label="Mobile navigation" class="border-t border-line md:hidden">
         <div class="frame relative mx-auto px-4 sm:px-7 flex flex-col gap-4 py-5 text-[13px]">
           <ULink raw to="#documentation" external class="text-accent" @click="menuOpen = false">Documentation</ULink>
+          <ULink raw to="#about" external class="transition-colors hover:text-accent" @click="menuOpen = false">The purpose</ULink>
           <ULink raw to="#framework" external class="transition-colors hover:text-accent" @click="menuOpen = false">Framework</ULink>
           <ULink raw to="#features" external class="transition-colors hover:text-accent" @click="menuOpen = false">Features</ULink>
           <ULink raw to="#start" external class="transition-colors hover:text-accent" @click="menuOpen = false">Get started</ULink>
-          <GithubLink :to="links.github" :stars="githubStars" class="transition-colors hover:text-accent" @click="menuOpen = false" />
         </div>
       </nav>
     </header>
@@ -109,7 +110,7 @@ onUnmounted(() => clearTimeout(feedbackTimer))
           <div>
             <p class="font-mono text-[10px] tracking-[0.08em] text-muted mb-5">PHP FRAMEWORK / TEEWORLDS 0.6</p>
             <h1 id="hero-title" class="text-[clamp(2.125rem,4.5vw,3.25rem)] leading-[1.1] font-medium tracking-[-0.05em]">Stop rebasing.<br /><span class="text-accent">Build your mod.</span></h1>
-            <p class="mt-5 max-w-[410px] text-sm leading-7 text-muted">Keep your game logic in your own project. TeeFrame is a Composer dependency, not a repository fork you have to keep rebasing over and over again.</p>
+            <p class="mt-5 max-w-[410px] text-sm leading-7 text-muted">Keep your game logic in your own project. TeeFrame is a package dependency, not a repository fork you have to keep rebasing over and over again.</p>
             <div class="mt-6 flex flex-wrap gap-2.5">
               <UButton to="#documentation" external label="Read the documentation" icon="i-lucide-book-open" />
               <UButton to="#start" external label="Get started" color="neutral" variant="outline" trailing-icon="i-lucide-arrow-right" />
@@ -146,11 +147,25 @@ onUnmounted(() => clearTimeout(feedbackTimer))
         </div>
       </section>
 
+      <section id="about" class="band" aria-labelledby="about-title">
+        <div class="frame relative mx-auto px-4 sm:px-7 grid grid-cols-1 gap-7 py-10 sm:py-12 md:grid-cols-[0.85fr_1.15fr] md:gap-12">
+          <div>
+            <p class="font-mono text-[10px] tracking-[0.08em] text-muted mb-3">02 / THE PURPOSE</p>
+            <h2 id="about-title" class="text-[clamp(1.375rem,2.5vw,1.625rem)] leading-[1.25] font-medium tracking-[-0.035em]">The purpose behind TeeFrame.</h2>
+          </div>
+          <div class="space-y-3 text-sm leading-7 text-muted">
+            <p>TeeFrame is a PHP framework for building Teeworlds 0.6 game servers. It provides the networking, physics, snapshots, and map handling, so you can focus on building your mod instead of maintaining an fork.</p>
+            <p>When your mod lives inside a fork, keeping it up to date means merging upstream commits, resolving conflicts, and checking how the changes affect your own code. Maintaining the fork becomes part of maintaining the game.</p>
+            <p>TeeFrame exists to separate those responsibilities. Your mod lives in its own project, while the engine is installed through Composer. Update the framework as a dependency instead of repeatedly rebasing for every new change upstream.</p>
+          </div>
+        </div>
+      </section>
+
       <section id="framework" class="band" aria-labelledby="framework-title">
         <div class="frame relative mx-auto px-4 sm:px-7 grid grid-cols-1 gap-7 py-10 sm:py-12 md:grid-cols-2 md:items-center md:gap-12">
           <div>
-            <p class="font-mono text-[10px] tracking-[0.08em] text-muted mb-3">02 / FRAMEWORK</p>
-            <h2 id="framework-title" class="text-[clamp(1.375rem,2.5vw,1.625rem)] leading-[1.25] font-medium tracking-[-0.035em]">Your mod isn't an engine fork.</h2>
+            <p class="font-mono text-[10px] tracking-[0.08em] text-muted mb-3">03 / FRAMEWORK</p>
+            <h2 id="framework-title" class="text-[clamp(1.375rem,2.5vw,1.625rem)] leading-[1.25] font-medium tracking-[-0.035em]">Your mod isn't an full-game fork.</h2>
             <p class="mt-4 text-sm leading-7 text-muted">Write your controllers, entities, and commands in the skeleton. The engine stays in <code class="rounded-sm bg-surface px-1 font-mono text-[11px] text-accent">vendor/</code>, managed by Composer.</p>
             <p class="mt-3 text-[13px] leading-6 text-muted">Update the framework without merging engine commits into your game code.</p>
             <ULink raw :to="links.framework" class="mt-5 inline-flex items-center gap-2 text-[13px] font-medium text-accent" target="_blank" rel="noopener noreferrer">Browse the framework <UIcon name="i-lucide-arrow-up-right" class="h-3.5 w-3.5" /></ULink>
@@ -179,7 +194,7 @@ onUnmounted(() => clearTimeout(feedbackTimer))
       <section id="features" class="band" aria-labelledby="features-title">
         <div class="frame relative mx-auto px-4 sm:px-7 py-10 sm:py-12">
           <div class="mb-6">
-            <p class="font-mono text-[10px] tracking-[0.08em] text-muted mb-3">03 / FEATURES</p>
+            <p class="font-mono text-[10px] tracking-[0.08em] text-muted mb-3">04 / FEATURES</p>
             <h2 id="features-title" class="text-[clamp(1.375rem,2.5vw,1.625rem)] leading-[1.25] font-medium tracking-[-0.035em]">What's in the engine.</h2>
           </div>
           <FeaturesGrid />
@@ -189,7 +204,7 @@ onUnmounted(() => clearTimeout(feedbackTimer))
       <section id="start" class="band" aria-labelledby="start-title">
         <div class="frame relative mx-auto px-4 sm:px-7 grid grid-cols-1 gap-7 py-10 sm:py-12 md:grid-cols-[0.85fr_1.15fr] md:gap-12">
           <div>
-            <p class="font-mono text-[10px] tracking-[0.08em] text-muted mb-3">04 / GET STARTED</p>
+            <p class="font-mono text-[10px] tracking-[0.08em] text-muted mb-3">05 / GET STARTED</p>
             <h2 id="start-title" class="text-[clamp(1.375rem,2.5vw,1.625rem)] leading-[1.25] font-medium tracking-[-0.035em]">Run your first server.</h2>
             <p class="mt-4 max-w-[325px] text-[13px] leading-6 text-muted">The skeleton includes a deathmatch world. Start it locally, then change the game logic in <code class="rounded-sm bg-surface px-1 font-mono text-[11px] text-accent">app/</code>.</p>
             <ULink raw :to="links.github" class="mt-3 inline-flex items-center gap-2 text-[13px] text-accent" target="_blank" rel="noopener noreferrer">Browse the skeleton <UIcon name="i-lucide-arrow-up-right" class="h-3 w-3" /></ULink>
