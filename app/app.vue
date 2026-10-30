@@ -12,23 +12,12 @@ const toast = useToast()
 let clipboardToastId: string | number | undefined
 let feedbackTimer: ReturnType<typeof setTimeout> | undefined
 
-const { data: githubRepository } = await useFetch<{ stargazers_count: number }>('https://api.github.com/repos/teeframe/teeframe', {
-  key: 'github-stars',
-  server: false,
-  lazy: true,
-  timeout: 5000,
-  retry: 0,
-})
-const githubStars = computed(() => {
-  const count = githubRepository.value?.stargazers_count
-  return typeof count === 'number' && Number.isSafeInteger(count) && count >= 0 ? count : null
-})
-
 const links = {
-  github: 'https://github.com/teeframe/teeframe',
+  skeleton: 'https://github.com/teeframe/skeleton',
   framework: 'https://github.com/teeframe/framework',
   protocol: 'https://protocol-docs.teeframe.com/',
   maps: 'https://map-docs.teeframe.com/',
+  discord: 'https://discord.gg/sxmBrFP8J4',
 }
 
 const steps = [
@@ -93,8 +82,8 @@ onUnmounted(() => clearTimeout(feedbackTimer))
           <ULink raw to="#features" external class="transition-colors hover:text-accent">Features</ULink>
         </nav>
         <div class="flex items-center gap-3">
-            <GithubLink :to="links.github" :stars="githubStars" class="transition-colors hover:text-accent" />
-
+          <DiscordLink :to="links.discord" class="transition-colors hover:text-accent" />
+          <GithubLink :to="links.framework" class="transition-colors hover:text-accent" />
           <UButton to="#start" external label="Get started" trailing-icon="i-lucide-arrow-right" class="hidden sm:inline-flex" />
           <UButton color="neutral" variant="outline" square class="size-9 p-0 text-muted md:hidden" :icon="menuOpen ? 'i-lucide-x' : 'i-lucide-menu'" :aria-expanded="menuOpen" aria-controls="mobile-nav" :aria-label="menuOpen ? 'Close navigation' : 'Open navigation'" @click="menuOpen = !menuOpen" />
         </div>
@@ -158,7 +147,7 @@ onUnmounted(() => clearTimeout(feedbackTimer))
         <div class="frame relative mx-auto px-4 sm:px-7 grid grid-cols-1 gap-7 py-10 sm:py-12 md:grid-cols-[0.85fr_1.15fr] md:gap-12">
           <div>
             <p class="font-mono text-[10px] tracking-[0.08em] text-muted mb-3">02 / THE PURPOSE</p>
-            <h2 id="about-title" class="text-[clamp(1.375rem,2.5vw,1.625rem)] leading-[1.25] font-medium tracking-[-0.035em]">The reason behind TeeFrame.</h2>
+            <h2 id="about-title" class="text-[clamp(1.375rem,2.5vw,1.625rem)] leading-[1.25] font-medium tracking-[-0.035em]">Mods deserve their own project.</h2>
           </div>
           <div class="space-y-3 text-sm leading-7 text-muted">
             <p>TeeFrame is a PHP framework for building Teeworlds 0.6 game servers. It provides the networking, physics, snapshots, and map handling, so you can focus on building your mod instead of maintaining a fork.</p>
@@ -214,7 +203,7 @@ onUnmounted(() => clearTimeout(feedbackTimer))
             <p class="font-mono text-[10px] tracking-[0.08em] text-muted mb-3">05 / GET STARTED</p>
             <h2 id="start-title" class="text-[clamp(1.375rem,2.5vw,1.625rem)] leading-[1.25] font-medium tracking-[-0.035em]">Run your first server.</h2>
             <p class="mt-4 max-w-[325px] text-[13px] leading-6 text-muted">The skeleton includes a deathmatch world. Start it locally, then change the game logic in <code class="rounded-sm bg-surface px-1 font-mono text-[11px] text-accent">app/</code>.</p>
-            <ULink raw :to="links.github" class="mt-3 inline-flex items-center gap-2 text-[13px] text-accent" target="_blank" rel="noopener noreferrer">Browse the skeleton <UIcon name="i-lucide-arrow-up-right" class="h-3 w-3" /></ULink>
+            <ULink raw :to="links.skeleton" class="mt-3 inline-flex items-center gap-2 text-[13px] text-accent" target="_blank" rel="noopener noreferrer">Browse the skeleton <UIcon name="i-lucide-arrow-up-right" class="h-3 w-3" /></ULink>
           </div>
           <div class="min-w-0 space-y-4">
             <div>
@@ -244,7 +233,12 @@ onUnmounted(() => clearTimeout(feedbackTimer))
           <div class="flex items-center gap-3"><span class="text-[13px] font-medium tracking-[-0.025em]">TeeFrame</span><span class="text-[11px] text-muted">© {{ new Date().getFullYear() }} · MIT</span></div>
           <p class="flex items-center gap-1 text-xs text-muted"><span>Created with</span><UIcon name="i-lucide-heart" class="h-3.5 w-3.5 text-rose-500 [&_path]:fill-current" /><span class="sr-only">love</span><span>by</span><ULink raw to="https://github.com/miguilimzero" target="_blank" rel="noopener noreferrer" class="hover:text-accent">Miguilim</ULink></p>
         </div>
-        <nav aria-label="Footer navigation" class="flex flex-wrap gap-x-5 gap-y-2 text-xs text-muted"><ULink raw :to="links.protocol" class="hover:text-accent">Protocol docs</ULink><ULink raw :to="links.maps" class="hover:text-accent">Map docs</ULink><GithubLink :to="links.github" :stars="githubStars" class="hover:text-accent" /></nav>
+        <nav aria-label="Footer navigation" class="flex flex-wrap gap-x-5 gap-y-2 text-xs text-muted">
+            <ULink raw :to="links.protocol" class="hover:text-accent">Protocol docs</ULink>
+            <ULink raw :to="links.maps" class="hover:text-accent">Map docs</ULink>
+            <DiscordLink :to="links.discord" class="hover:text-accent" />
+            <GithubLink :to="links.framework" class="hover:text-accent" />
+        </nav>
       </div>
     </footer>
 
