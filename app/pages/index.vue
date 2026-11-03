@@ -13,14 +13,15 @@ let clipboardToastId: string | number | undefined
 let feedbackTimer: ReturnType<typeof setTimeout> | undefined
 
 const links = {
-  skeleton: 'https://github.com/teeframe/skeleton',
+  boilerplate: 'https://github.com/teeframe/teeframe',
+  multiworld: 'https://github.com/teeframe/teeframe-multiworld',
   framework: 'https://github.com/teeframe/framework',
   protocol: 'https://protocol-docs.teeframe.com/',
   maps: 'https://map-docs.teeframe.com/',
 }
 
 const steps = [
-  { id: 'clone', number: '02', title: 'Clone the skeleton', commands: ['git clone https://github.com/teeframe/teeframe.git', 'cd teeframe'] },
+  { id: 'clone', number: '02', title: 'Clone the boilerplate', commands: ['git clone https://github.com/teeframe/teeframe.git', 'cd teeframe'] },
   { id: 'install', number: '03', title: 'Install dependencies', commands: ['composer install'] },
   { id: 'run', number: '04', title: 'Start the server', commands: ['php server.php'] },
 ]
@@ -167,8 +168,8 @@ onUnmounted(() => clearTimeout(feedbackTimer))
           <div>
             <p class="font-mono text-[10px] tracking-[0.08em] text-muted mb-3">05 / GET STARTED</p>
             <h2 id="start-title" class="text-[clamp(1.375rem,2.5vw,1.625rem)] leading-[1.25] font-medium tracking-[-0.035em]">Run your first server.</h2>
-            <p class="mt-4 max-w-[325px] text-[13px] leading-6 text-muted">The skeleton includes a deathmatch world. Start it locally, then change the game logic in <code class="rounded-sm bg-surface px-1 font-mono text-[11px] text-accent">app/</code>.</p>
-            <ULink raw :to="links.skeleton" class="mt-3 inline-flex items-center gap-2 text-[13px] text-accent" target="_blank" rel="noopener noreferrer">Browse the skeleton <UIcon name="i-lucide-arrow-up-right" class="h-3 w-3" /></ULink>
+            <p class="mt-4 max-w-[325px] text-[13px] leading-6 text-muted">The boilerplate includes a deathmatch world. Start it locally, then change the game logic in <code class="rounded-sm bg-surface px-1 font-mono text-[11px] text-accent">app/</code>.</p>
+            <ULink raw :to="links.boilerplate" class="mt-3 inline-flex items-center gap-2 text-[13px] text-accent" target="_blank" rel="noopener noreferrer">Browse the boilerplate <UIcon name="i-lucide-arrow-up-right" class="h-3 w-3" /></ULink>
           </div>
           <div class="min-w-0 space-y-4">
             <div>
@@ -188,6 +189,20 @@ onUnmounted(() => clearTimeout(feedbackTimer))
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section class="band bg-surface/50" aria-labelledby="multiworld-title">
+        <div class="frame relative mx-auto flex flex-col justify-between gap-5 px-4 py-8 sm:flex-row sm:items-center sm:px-7 sm:py-10">
+          <div class="flex items-start gap-4">
+            <span class="hidden size-11 shrink-0 items-center justify-center rounded border border-accent/20 bg-white text-accent sm:flex" aria-hidden="true"><UIcon name="i-lucide-layers" class="size-5" /></span>
+            <div>
+              <p class="mb-2 font-mono text-[9px] tracking-[0.08em] text-muted">MULTI-WORLD BOILERPLATE</p>
+              <h2 id="multiworld-title" class="text-lg font-medium tracking-[-0.035em]">Ready for multiple worlds?</h2>
+              <p class="mt-2 text-[13px] leading-6 text-muted">Try the multi-world boilerplate to run multiple maps and game modes in one server.</p>
+            </div>
+          </div>
+          <UButton :to="links.multiworld" target="_blank" rel="noopener noreferrer" label="Browse multi-world skeleton" color="neutral" variant="outline" trailing-icon="i-lucide-arrow-up-right" class="self-start sm:self-center" />
         </div>
       </section>
     </main>
