@@ -6,6 +6,7 @@ import {
   ecosystemLanguages,
   type EcosystemCategory,
   type EcosystemLanguage,
+  type EcosystemStatus,
 } from '#shared/ecosystem'
 
 const description = 'Discover community-built projects, tools, libraries, clients, and mods for Teeworlds and DDraceNetwork. Find your next building block in the TeeFrame ecosystem directory.'
@@ -29,7 +30,7 @@ defineOgImage('Ecosystem.takumi', { count: ecosystemEntries.length }, {
 const query = ref('')
 const selectedCategory = ref<EcosystemCategory>('projects')
 const selectedLanguage = ref<EcosystemLanguage | 'all'>('all')
-const sort = ref('curated')
+const sort = ref('status')
 const searchInput = useTemplateRef<HTMLInputElement>('searchInput')
 
 const categories = ecosystemCategories.map(category => ({
@@ -37,6 +38,11 @@ const categories = ecosystemCategories.map(category => ({
   count: ecosystemEntries.filter(entry => entry.category === category.id).length,
 }))
 const categoryLabels = new Map(ecosystemCategories.map(category => [category.id, category.label]))
+const statuses: Record<EcosystemStatus, { label: string; dotClass: string; order: number }> = {
+  maintained: { label: 'Maintained', dotClass: 'bg-green-500', order: 0 },
+  unclassified: { label: 'Unclassified', dotClass: 'bg-gray-400', order: 1 },
+  abandoned: { label: 'Abandoned', dotClass: 'bg-red-500', order: 2 },
+}
 const languageIcons: Record<EcosystemLanguage, string> = {
   'Rust': 'i-simple-icons-rust',
   'Ruby': 'i-simple-icons-ruby',
@@ -62,11 +68,13 @@ const filteredEntries = computed(() => {
   const entries = ecosystemEntries.filter(entry => {
     if (entry.category !== selectedCategory.value) return false
     if (selectedLanguage.value !== 'all' && entry.language !== selectedLanguage.value) return false
-    const searchable = [entry.name, entry.description, categoryLabels.get(entry.category), entry.language, ...entry.tags].join(' ').toLowerCase()
+    const searchable = [entry.name, entry.description, categoryLabels.get(entry.category), entry.language].join(' ').toLowerCase()
     return terms.every(term => searchable.includes(term))
   })
 
-  if (sort.value !== 'curated') {
+  if (sort.value === 'status') {
+    entries.sort((a, b) => statuses[a.status].order - statuses[b.status].order)
+  } else {
     entries.sort((a, b) => a.name.localeCompare(b.name, 'en') * (sort.value === 'name-desc' ? -1 : 1))
   }
   return entries
@@ -104,7 +112,7 @@ defineShortcuts({
         <div class="relative mx-auto max-w-2xl text-center">
           <p class="mb-4 font-mono text-[10px] tracking-[0.12em] text-muted">COMMUNITY DIRECTORY</p>
           <h1 id="ecosystem-title" class="text-[clamp(2.125rem,5vw,3.5rem)] leading-[1.08] font-medium tracking-[-0.055em]">The Teeworlds ecosystem.<br /><span class="text-accent">Explore. Build. Play.</span></h1>
-          <p class="mx-auto mt-5 max-w-[490px] text-sm leading-7 text-muted">Big ideas start with a few good tools. Explore the projects, libraries, and mods built by the Teeworlds community.</p>
+          <p class="mx-auto mt-5 max-w-[490px] text-sm leading-7 text-muted">Big ideas start with a few good tools. Explore the projects, libraries, and mods built by the Teeworlds community (0.6 Only).</p>
         </div>
 
         <div class="mx-auto mt-9 max-w-[750px]">
@@ -120,7 +128,7 @@ defineShortcuts({
               <label for="ecosystem-sort" class="sr-only">Sort resources</label>
               <UIcon name="i-lucide-arrow-down-wide-narrow" class="pointer-events-none absolute top-3.5 left-3 size-4 text-muted" />
               <select id="ecosystem-sort" v-model="sort" class="h-11 w-full appearance-none rounded border border-line bg-white pr-9 pl-9 text-xs text-foreground focus:border-accent focus:outline-2 focus:outline-offset-2 focus:outline-accent sm:w-44">
-                <option value="curated">Curated order</option>
+                <option value="status">Status</option>
                 <option value="name-asc">Name: A to Z</option>
                 <option value="name-desc">Name: Z to A</option>
               </select>
@@ -129,7 +137,7 @@ defineShortcuts({
           </div>
         </div>
 
-        <div class="mt-5 flex flex-wrap justify-center gap-2" role="group" aria-label="Filter resources by category">
+        <div class="mx-auto mt-5 flex max-w-2xl flex-wrap justify-center gap-2" role="group" aria-label="Filter resources by category">
           <button v-for="category in categories" :key="category.id" type="button" class="ecosystem-filter inline-flex min-h-9 items-center gap-2 rounded border px-3 text-xs transition-colors" :class="selectedCategory === category.id ? 'border-accent/30 bg-accent/5 text-accent' : 'border-line bg-white text-muted'" :aria-pressed="selectedCategory === category.id" @click="selectCategory(category.id)">
             <UIcon :name="category.icon" class="size-3.5" /> {{ category.label }} <span class="font-mono text-[10px] opacity-65">{{ category.count }}</span>
           </button>
@@ -156,17 +164,28 @@ defineShortcuts({
           <article v-for="entry in filteredEntries" :key="entry.id" class="ecosystem-card feature-card group flex min-w-0 flex-col rounded-md border border-line bg-white p-5 transition-colors hover:border-accent/40 hover:bg-blueprint-50/50 focus-within:border-accent/40" :aria-labelledby="'resource-' + entry.id">
             <div class="mb-4 flex items-center justify-between gap-3">
               <span class="blueprint-board flex size-10 shrink-0 items-center justify-center rounded border border-accent/15 text-accent" aria-hidden="true"><UIcon :name="entry.icon" class="size-5" /></span>
-              <span class="rounded-sm border border-line bg-surface/70 px-2 py-1 font-mono text-[9px] text-muted">{{ entry.language || categoryLabels.get(entry.category) }}</span>
+              <span class="inline-flex items-center gap-1.5 rounded-sm border border-line bg-surface/70 px-2 py-1 font-mono text-[9px] text-muted">
+                <span class="size-1.5 shrink-0 rounded-full" :class="statuses[entry.status].dotClass" aria-hidden="true" />
+                {{ statuses[entry.status].label }}
+              </span>
             </div>
             <h3 :id="'resource-' + entry.id" class="text-[15px] leading-6 font-medium tracking-[-0.025em] [overflow-wrap:anywhere]"><ULink raw :to="entry.url" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-accent">{{ entry.name }}<span class="sr-only"> (opens in a new tab)</span></ULink></h3>
-            <p class="mt-2 text-[13px] leading-6 text-muted">{{ entry.description }}</p>
-            <ul class="mt-4 mb-5 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[9px] text-muted" aria-label="Topics">
-              <li v-for="tag in entry.tags" :key="tag" class="inline-flex items-center gap-1.5"><span class="size-1 rounded-full bg-accent/35" aria-hidden="true" />{{ tag }}</li>
-            </ul>
+            <p class="mt-2 mb-5 text-[13px] leading-6 text-muted">{{ entry.description }}</p>
             <div class="mt-auto flex items-center justify-between gap-3 border-t border-dashed border-line pt-3">
-              <ULink raw :to="entry.url" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-7 items-center gap-1.5 text-xs font-medium text-accent" :aria-label="'Explore ' + entry.name + ' (opens in a new tab)'">Explore project <UIcon name="i-lucide-arrow-up-right" class="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /></ULink>
-              <ULink v-if="entry.repository && entry.repository !== entry.url" raw :to="entry.repository" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-7 items-center gap-1.5 rounded-sm px-1 text-[11px] text-muted transition-colors hover:text-accent" :aria-label="'View source for ' + entry.name + ' (opens in a new tab)'"><UIcon name="i-lucide-code" class="size-3.5" />Source</ULink>
-              <span v-else class="font-mono text-[9px] text-muted/70">{{ categoryLabels.get(entry.category) }}</span>
+                <ULink raw :to="entry.url" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-7 items-center gap-1.5 text-xs font-medium text-accent" :aria-label="'Explore ' + entry.name + ' (opens in a new tab)'">Explore <UIcon name="i-lucide-arrow-up-right" class="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /></ULink>
+
+                <div class="flex items-center gap-2">
+                    <ULink v-if="entry.repository && entry.repository !== entry.url" raw :to="entry.repository" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-7 items-center gap-1.5 rounded-sm px-1 text-[11px] text-muted transition-colors hover:text-accent" :aria-label="'View source for ' + entry.name + ' (opens in a new tab)'">
+                        <UIcon name="i-lucide-git-branch" class="size-3.5" /> Source
+                    </ULink>
+
+                    <UTooltip v-if="entry.teeframe" text="Uses TeeFrame under the hood">
+                        <span tabindex="0" class="ml-auto inline-flex min-h-7 shrink-0 items-center gap-1 text-[11px] font-medium text-green-700">
+                            <UIcon name="i-lucide-badge-check" class="size-3.5 -translate-y-px" aria-hidden="true" />
+                            TeeFrame
+                        </span>
+                    </UTooltip>
+                </div>
             </div>
           </article>
         </div>
@@ -174,7 +193,6 @@ defineShortcuts({
           <span class="mb-4 flex size-12 items-center justify-center rounded-md border border-line bg-white text-accent"><UIcon name="i-lucide-search-x" class="size-5" /></span>
           <h3 class="text-base font-medium tracking-[-0.025em]">No resources found.</h3>
           <p class="mt-2 max-w-sm text-[13px] leading-6 text-muted">Try another search or clear your filters to explore this category.</p>
-          <UButton label="Clear filters" color="neutral" variant="outline" icon="i-lucide-rotate-ccw" class="mt-5" @click="clearFilters" />
         </div>
 
         <div class="mt-8 flex flex-col justify-between gap-3 border-t border-dashed border-line pt-5 sm:flex-row sm:items-start">
@@ -248,6 +266,6 @@ defineShortcuts({
   color: var(--color-accent);
 }
 
-.ecosystem-card { min-height: 270px; }
+
 .ecosystem-search input::-webkit-search-cancel-button { display: none; }
 </style>

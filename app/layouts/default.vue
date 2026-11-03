@@ -37,13 +37,13 @@ watch(() => route.fullPath, () => { menuOpen.value = false })
         <div class="flex items-center gap-3">
           <DiscordLink :to="links.discord" class="transition-colors hover:text-accent" />
           <GithubLink :to="links.framework" class="transition-colors hover:text-accent" />
-          <UButton to="/#start" label="Get started" trailing-icon="i-lucide-arrow-right" class="hidden sm:inline-flex" />
+          <UButton to="/#start" label="Get started" trailing-icon="i-lucide-arrow-right" class="hidden lg:inline-flex" />
           <UButton color="neutral" variant="outline" square class="size-9 p-0 text-muted lg:hidden" :icon="menuOpen ? 'i-lucide-x' : 'i-lucide-menu'" :aria-expanded="menuOpen" aria-controls="mobile-nav" :aria-label="menuOpen ? 'Close navigation' : 'Open navigation'" @click="menuOpen = !menuOpen" />
         </div>
       </div>
       <nav v-show="menuOpen" id="mobile-nav" aria-label="Mobile navigation" class="border-t border-line lg:hidden">
         <div class="frame relative mx-auto flex flex-col gap-4 px-4 py-5 text-[13px] sm:px-7">
-          <ULink v-for="item in navigation" :key="item.to" raw :to="item.to" class="transition-colors hover:text-accent" :class="{ 'text-accent': route.path === '/ecosystem' ? item.to === '/ecosystem' : item.to === '/#documentation' }" :aria-current="route.path === item.to ? 'page' : undefined" @click="menuOpen = false">{{ item.label }}</ULink>
+          <ULink v-for="item in navigation" :key="item.to" raw :to="item.to" class="transition-colors hover:text-accent" :class="{ 'text-accent': route.path === '/ecosystem' && item.to === '/ecosystem', 'font-semibold' : item.to === '/ecosystem' }" :aria-current="route.path === item.to ? 'page' : undefined" @click="menuOpen = false">{{ item.label }}</ULink>
           <ULink raw to="/#start" class="transition-colors hover:text-accent" @click="menuOpen = false">Get started</ULink>
         </div>
       </nav>

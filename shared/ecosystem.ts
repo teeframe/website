@@ -4,9 +4,10 @@ import { libraries } from './ecosystem/libraries'
 import { clients } from './ecosystem/clients'
 import { clientServerMods } from './ecosystem/client-server-mods'
 import { serverSideMods } from './ecosystem/server-side-mods'
+import { documentation } from './ecosystem/documentation'
 import type { EcosystemCategory, EcosystemEntry, EcosystemLanguage } from './ecosystem/types'
 
-export type { EcosystemCategory, EcosystemEntry, EcosystemLanguage } from './ecosystem/types'
+export type { EcosystemCategory, EcosystemEntry, EcosystemLanguage, EcosystemStatus } from './ecosystem/types'
 
 export const ecosystemCategories = [
   { id: 'projects', label: 'Projects', icon: 'i-lucide-orbit' },
@@ -15,6 +16,7 @@ export const ecosystemCategories = [
   { id: 'clients', label: 'Clients', icon: 'i-lucide-monitor' },
   { id: 'client-server-mods', label: 'Client-server mods', icon: 'i-lucide-blocks' },
   { id: 'server-side-mods', label: 'Server-side mods', icon: 'i-lucide-server' },
+  { id: 'documentation', label: 'Documentation', icon: 'i-lucide-book-open' },
 ] satisfies { id: EcosystemCategory; label: string; icon: string }[]
 
 export const ecosystemLanguages: EcosystemLanguage[] = [
@@ -34,4 +36,5 @@ export const ecosystemEntries: EcosystemEntry[] = [
   ...clients,
   ...clientServerMods,
   ...serverSideMods,
+  ...documentation,
 ]

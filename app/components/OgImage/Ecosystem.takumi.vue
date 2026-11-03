@@ -19,7 +19,7 @@ defineProps<{ count: number }>()
           <div>The Teeworlds ecosystem.</div>
           <div class="text-accent">Explore. Build. Play.</div>
         </div>
-        <div class="mt-6 max-w-[600px] text-[21px] leading-[34px] text-muted">Big ideas start with a few good tools. Explore the projects, libraries, and mods built by the Teeworlds community.</div>
+        <div class="mt-6 max-w-[600px] text-[21px] leading-[34px] text-muted">Big ideas start with a few good tools. Explore the projects, libraries, and mods built by the Teeworlds community (0.6 Only).</div>
       </div>
       <div class="flex h-[208px] w-[208px] shrink-0 flex-col items-center justify-center rounded-md border border-accent/25 bg-surface" style="background-image: linear-gradient(#166aaf13 1px, transparent 1px), linear-gradient(90deg, #166aaf13 1px, transparent 1px); background-size: 26px 26px">
         <div class="text-[76px] leading-none font-medium tracking-[-0.06em] text-accent">{{ count }}</div>
