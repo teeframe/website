@@ -1,6 +1,9 @@
 
 import { env } from 'node:process'
 import { siteDescription as description } from './shared/site'
+import { ecosystemCategories, ecosystemEntries } from './shared/ecosystem'
+
+const ecosystemIcons = [...new Set([...ecosystemCategories, ...ecosystemEntries].map(item => item.icon.replace(/^i-(lucide|simple-icons)-/, '$1:')))]
 
 const siteUrl = (env.NUXT_PUBLIC_SITE_URL || 'https://teeframe.com').replace(/\/+$/, '')
 
@@ -25,7 +28,7 @@ export default defineNuxtConfig({
   },
   nitro: {
     prerender: {
-      routes: ['/'],
+      routes: ['/', '/ecosystem'],
     },
   },
   ui: {
@@ -45,6 +48,10 @@ export default defineNuxtConfig({
         'lucide:copy', 'lucide:check', 'lucide:heart', 'lucide:star',
         'lucide:box', 'lucide:crosshair', 'lucide:map', 'lucide:sliders-horizontal',
         'simple-icons:github',
+        'lucide:search', 'lucide:search-x',
+        'lucide:arrow-down-wide-narrow', 'lucide:chevron-down',
+        'lucide:rotate-ccw', 'lucide:git-pull-request',
+        ...ecosystemIcons,
       ],
     },
   },
